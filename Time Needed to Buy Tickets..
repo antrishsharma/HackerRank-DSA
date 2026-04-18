@@ -1,0 +1,27 @@
+#include<stdio.h>
+int main(){
+    int n;
+    int ticket[101];
+    int time=0;
+    int k;
+    
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&ticket[i]);
+    }
+    
+    scanf("%d",&k);
+    while(ticket[k]>0){
+        for(int i=0;i<n;i++){
+            if(ticket[i]>0){
+                ticket[i]--;
+            time++;}
+            
+            if(ticket[k]==0){
+                printf("%d",time);
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
