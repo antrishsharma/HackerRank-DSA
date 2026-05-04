@@ -1,0 +1,32 @@
+#include<stdio.h>
+int main(){
+    int a[1000],n,p,d;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    scanf("%d",&d);
+    for(int i=n;i>0;i--) a[i]=a[i-1];
+    a[0]=d;
+    n++;
+    
+    scanf("%d",&p);p--;
+    for(int i=p;i<n-1;i++) a[i]=a[i+1];
+    
+    n--;
+    
+    scanf("%d",&d);
+    a[n]=d;n++;
+    
+    scanf("%d %d",&p,&d);p--;
+    for(int i=n;i>p;i--) a[i]=a[i-1];
+    a[p]=d;n++;
+    
+    for(int i=0;i<n;i++){
+        printf("%d",a[i]);
+        if(i!=n-1){printf(" ");}
+    }
+    return 0;
+    
+    
+}
