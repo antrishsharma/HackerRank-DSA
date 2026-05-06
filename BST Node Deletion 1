@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* left;
+struct node* right ;};
+
+struct node* newnode(int d){ 
+    struct node* n = malloc(sizeof(struct node));
+    n->data=d;
+    n->left=NULL;
+    n->right=NULL;
+    return n;
+}
+
+struct node* insert(struct node* root,int d){
+    if(root == NULL){ return newnode(d); }
+    if(d<root->data){root->left = insert(root->left,d);}
+    else{root->right = insert(root->right,d);}
+    return root;
+}
+
+struct node* findmin(struct node* root){
+    while(root->left){root=root->left;}
+    return root;
+}
+
+struct node* del(struct node* root,int k){
+    if(root==NULL){return NULL;}
+    if(k<root->data){root->left=del(root->left,k);}
+    else if(k>root->data){root->right= del(root->right,k);}
+    else{
+        if(root->left==NULL)return root->right;
+        if(root->right==NULL)return root->left;  
+    
+
+
+struct node* succ = findmin(root->right);
+root->data= succ->data;
+root->right=del(root->right,succ->data);}
+return root;}
+
+
+void inorder(struct node* root){
+    if(root == NULL) return ;
+    inorder(root->left);
+    printf("%d ",root->data);
+    inorder(root->right);
+}
+
+int main(){
+    int n,k;
+    scanf("%d",&n);
+    struct node* root =NULL;
+    for(int i=0;i<n;i++){
+        int x;
+        scanf("%d",&x);
+        root= insert(root,x);
+    }
+    
+    scanf("%d",&k);
+    root = del(root,k);
+    
+    inorder(root);
+    return 0;
+}
