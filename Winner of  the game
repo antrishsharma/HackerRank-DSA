@@ -1,0 +1,22 @@
+#include<stdio.h>
+int main(){
+    int a[1000],n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    
+    int odd=0,even=0;
+    for(int i=0;i<n;i=i+2){if(a[i+1]>a[i]) odd++;
+                        else  if(a[i]>a[i+1]) even++;}
+    
+    if(odd>even){
+        printf("Odd");}
+    else if(even>odd){
+        printf("Even");
+    }
+    else{printf("Tie");}
+    return 0;
+    
+}
+
