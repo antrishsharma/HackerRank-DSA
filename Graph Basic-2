@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main() {
+    int n, e;
+    scanf("%d", &n);
+    scanf("%d", &e);
+
+    int m[10][10] = {0};
+
+    for (int i = 0; i < e; i++) {
+        int u, v;
+        scanf("%d %d", &u, &v);
+        m[u][v] = 1;
+        m[v][u] = 1;
+    }
+
+    int s;
+    scanf("%d", &s);
+
+    int queue[10];
+    int front = 0, rear = 0;
+    int visited[10] = {0};
+
+    // start BFS from s
+    queue[rear++] = s;
+    visited[s] = 1;
+
+    while (front < rear) {
+        int node = queue[front++];
+        printf("%d ", node);
+
+        for (int j = 0; j < n; j++) {
+            if (m[node][j] == 1 && visited[j] == 0) {
+                visited[j] = 1;
+                queue[rear++] = j;
+            }
+        }
+    }
+
+    return 0;
+}
