@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+int main() {
+    int n, e;
+    scanf("%d", &n);
+    scanf("%d", &e);
+
+    int m[10][10] = {0};
+
+    for (int i = 0; i < e; i++) {
+        int u, v;
+        scanf("%d %d", &u, &v);
+        m[u][v] = 1;
+        m[v][u] = 1;
+    }
+
+    int s, d;
+    scanf("%d %d", &s, &d);
+
+    int queue[10];
+    int front = 0, rear = 0;
+    int visited[10] = {0};
+
+    queue[rear++] = s;
+    visited[s] = 1;
+
+    while (front < rear) {
+        int node = queue[front++];
+
+        if (node == d) {
+            printf("Path Exists");
+            return 0;
+        }
+
+        for (int j = 0; j < n; j++) {
+            if (m[node][j] == 1 && visited[j] == 0) {
+                visited[j] = 1;
+                queue[rear++] = j;
+            }
+        }
+    }
+
+    printf("No Path");
+    return 0;
+}
