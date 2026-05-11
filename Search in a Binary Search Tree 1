@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+ struct node{int data;
+             struct node* left;
+             struct node* right;};
+
+
+struct node* newnode(int val){
+    struct node* newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data=val;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    return newnode;
+}
+
+struct node* insert(struct node* root,int val){
+    if(root == NULL) return newnode(val);
+    if(val<root->data) 
+        root->left=insert(root->left,val);
+    else
+        root->right=insert(root->right,val);
+    
+    return root;
+}
+     
+     int search(struct node* root,int k){
+    if(root == NULL) return 0;
+    if(root->data == k) return 1;
+    if(k<root->data)
+        return search(root->left,k);
+    else
+        return search(root->right,k);
+    
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    struct node* root = NULL;
+    for(int i=0;i<n;i++){
+        int val;
+        scanf("%d",&val);
+        root = insert(root,val);
+    }
+    int k;
+    scanf("%d",&k);
+    if(search(root,k))
+        printf("%d found in BST",k);
+    else
+        printf("%d not found in BST",k);
+    return 0;
+}
