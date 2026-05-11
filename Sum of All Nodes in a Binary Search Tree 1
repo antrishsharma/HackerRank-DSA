@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+struct node* newnode(int val) {
+    struct node* n = (struct node*)malloc(sizeof(struct node));
+    n->data = val;
+    n->left = NULL;
+    n->right = NULL;
+    return n;
+}
+
+struct node* insert(struct node* root, int val) {
+    if (root == NULL) return newnode(val);
+    if (val < root->data)
+        root->left = insert(root->left, val);
+    else
+        root->right = insert(root->right, val);
+    return root;
+}
+
+// sum ALL nodes (no leaf check needed)
+int totalsum(struct node* root) {
+    if (root == NULL) return 0;
+    return root->data + totalsum(root->left) + totalsum(root->right);
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    struct node* root = NULL;
+
+    for (int i = 0; i < n; i++) {
+        int val;
+        scanf("%d", &val);
+        root = insert(root, val);
+    }
+
+    printf("%d", totalsum(root));
+    return 0;
+}
